@@ -35,10 +35,14 @@ function jumpAlipayAuth(authType) {
   }, 0);
 }
 var codeDom = document.getElementById('code');
-if(!authCode){
-  jumpAlipayAuth(defaultAuthType)
+if(isWechat){
+  if(!authCode){
+    jumpAlipayAuth(defaultAuthType)
+  }else{
+    codeDom.innerHTML = authCode
+  }
 }else{
-  codeDom.innerHTML = authCode
+  codeDom.innerHTML = '请在微信中打开';
 }
 </script>
 </body>

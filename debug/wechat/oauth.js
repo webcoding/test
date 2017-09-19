@@ -55,6 +55,7 @@
 
   window.getUrlParam = getUrlParam;
 })(window)
+
 (function(window){
   // 取授权跳转 url
   var userAgent = navigator.userAgent.toLowerCase();
@@ -119,4 +120,6 @@
     appId: appId,
     oauthUrl: oauthUrl,
   };
+  window.isAlipay = isAlipay;
+  window.isWechat = isWechat;
 })(window)
