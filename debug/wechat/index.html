@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+<title>微信授权</title>
+<style>
+pre{margin-top: 5em; margin-bottom: 5em;}
+.code{padding: 0 3em; word-break: break-all; line-height: 1.5;}
+#code{color:#f00; font-size: 2rem;}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  //规则规则，参数都为 key-value 值形式，若值为 url，必须 encodeURIComponent 处理
+  function getUrlParam(url, key) {
+    if (!url) url = location.href;
+
+    var searchReg = /([^&=?]+)=([^&]+)/g;
+    var urlReg = /\/+.*\?/;
+    var arrayReg = /(.+)\[\]$/;
+    var urlParams = {};
+    var match, name, value, isArray;
+
+    url = url.replace(/\?/g, '&').replace('&', '?');
+
+    while (match = searchReg.exec(url)) {
+      name = match[1];
+      value = match[2];
+      isArray = name.match(arrayReg);
+      //处理参数为url这种情况
+      if (urlReg.test(value)) {
+        urlParams[name] = url.substr(url.indexOf(value));
+        break;
+      } else {
+        if (isArray) {
+          name = isArray[1];
+          urlParams[name] = urlParams[name] || [];
+          urlParams[name].push(value);
+        } else {
+          urlParams[name] = value;
+        }
+      }
+    }
+
+    return key ? urlParams[key] : urlParams;
+  };
+
+  var urlObj = getUrlParam();
+
+  //微信跳转的地址
+  var searchParam,
+      wechat_oauth_host = location.origin,
+      // urlpath = '/debug/wechat/code.html',
+      bindtype = urlObj.bindtype || 'snsapi_base',
+      jumpurl = urlObj.jumpurl,
+      code = urlObj.code;
+
+  if(code){
+    searchParam = location.search;
+  }
+  if(searchParam && jumpurl){
+    var temp = '&jumpurl=' + jumpurl;
+    url = decodeURIComponent(jumpurl);
+    var urlfix = url.indexOf("?") === -1 ? '?' : '&';
+
+    url = url + urlfix + searchParam.replace(temp, '').replace('?','');
+    location.replace(url);
+  }
+})();
+</script>
+</body>
+</html>
