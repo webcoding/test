@@ -75,7 +75,8 @@
     debugCodePath = '/debug/alipay/code.html';
   }
   if(isWechat){
-    appId = 'wxc9dd03d5b90cf5f5';
+    // appId = 'wxc9dd03d5b90cf5f5';
+    appId = 'wx2809d5f8b7a15179'; // 测试使用
     debugCodePath = '/debug/wechat/code.html';
   }
   function oauthUrl(type, url){
