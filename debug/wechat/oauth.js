@@ -68,7 +68,7 @@
   var appId;
   var time = Date.now();
 
-  oauthHost = 'm.haoshiqi.net';
+  oauthHost = 'oauth.devnode.cn';
   debugCode = !(location.host === oauthHost);
   if(isAlipay){
     appId = '2014082500009174';
