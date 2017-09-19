@@ -29,7 +29,7 @@ var store = {
 }
 function jumpAlipayAuth(authType) {
   store.set('oauthLength', history.length);
-  var authUrl = Auth.oauthUrl(authType, curPageUrl);
+  var authUrl = wxAuth.oauthUrl(authType, curPageUrl);
   setTimeout(function(){
     location.replace(authUrl);
   }, 0);

@@ -54,7 +54,7 @@
   };
 
   window.getUrlParam = getUrlParam;
-})(window)
+})(window);
 
 (function(window){
   // 取授权跳转 url
@@ -122,4 +122,4 @@
   };
   window.isAlipay = isAlipay;
   window.isWechat = isWechat;
-})(window)
+})(window);
