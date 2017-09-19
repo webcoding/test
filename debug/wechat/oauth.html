@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>微信授权</title>
+</head>
+<body>
+<h1>Code:</h1>
+<p id="code"></p>
+<script src="oauth.js"></script>
+<script>
+var curPageUrl = '';
+var defaultAuthType = 'snsapi_base';
+var params = getUrlParam();
+var authCode = params.code;
+var Storage = window.localStorage;
+var store = {
+  get: function(key){
+    Storage.getItem(key);
+  },
+  set: function(key, value){
+    Storage.setItem(key, value);
+  },
+  clear: function() {
+    Storage.clear();
+  }
+}
+function jumpAlipayAuth(authType) {
+  store.set('oauthLength', history.length);
+  var authUrl = Auth.oauthUrl(authType, curPageUrl);
+  setTimeout(function(){
+    location.replace(authUrl);
+  }, 0);
+}
+var codeDom = document.getElementById('code');
+if(!authCode){
+  jumpAlipayAuth(defaultAuthType)
+}else{
+  codeDom.innerHTML = authCode
+}
+</script>
+</body>
+</html>
